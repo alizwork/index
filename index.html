@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>社畜の日常💀</title>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="input-section1">
+      <label for="approveId">🔜Approve: </label>
+      <input type="text" id="approveId" placeholder="Case Number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="6" onkeydown="handleKeyDown(event)" oninput="filterNonNumeric(event)">
+    </div>
+    <div class="input-section1">
+      <label>✅Confirmation: </label>
+      <input type="text" id="confirmationId" placeholder="Case Number">
+    </div>
+    
+    <a href="https://www.tutorcircle.hk/panel/admin/cases_create/" target="_blank" class="icon-link1">
+      <img src="new.png" alt="New" width="55" height="50" style="width:55px !important; height:50 px !important;">
+    </a>
+    <a href="https://www.tutorcircle.hk/panel/admin/cert_check_new/" target="_blank" class="icon-link2">
+      <img src="cert.png" alt="Cert" width="30" height="20" style="width:50px !important; height:47px !important;">
+    </a>
+    
+  </div>
+  
+<!-- 第二個 top-bar (保持您原有的 Tutor List 和 Receipt) -->
+<div class="top-bar" style="margin-bottom: 0;">  <!-- 新增這行 -->
+  <div class="input-section2">
+    <label for="tutorListId">👩🏼‍🏫Tutor List:</label>
+    <input type="text" id="tutorListId" placeholder="Case Number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="6">
+  </div>
+  <div class="input-section2">
+    <label for="receiptId">💰Receipt:</label>
+    <input type="text" id="receiptId" placeholder="Case Number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="6">
+  </div>
+</div>
+
+<!-- 新增獨立的第三個 top-bar (專門放雙開功能) -->
+ 
+<div class="top-bar" style="justify-content: center; margin-top: -8px;">  <!-- 負值調整 -->
+  <div class="input-section2" style="margin: 0 auto;">
+    <label for="doubleOpenId">🚀 Receipt & Contact: </label>
+    <input type="text" id="doubleOpenId" placeholder="Case Number" 
+           oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+           maxlength="6"
+           onkeydown="handleDoubleOpenKeyDown(event)">
+    <button onclick="openCaseInDoubleTabs()" class="double-tab-button">
+      Enter
+    </button>
+  </div>
+</div>
+
+  </div>
+
+  <div class="content">
+    <h3 style="display: inline;">搜尋導師: 🔎</h3>
+    <input type="text" id="tutorInput" placeholder="輸入導師編號或電話號碼" onkeydown="handleKeyDown(event, 'tutor')" oninput="filterNonNumeric(event, 'tutor')">
+    <h3 style="display: inline;">搜尋個案: 🔎</h3>
+    <input type="text" id="caseInput" placeholder="輸入個案編號或電話號碼" onkeydown="handleKeyDown(event, 'case')" oninput="filterNonNumeric(event, 'case')">
+</div>
+
+<!-- 回覆的導師 -->
+<div class="conversation" style="margin-left: 350px;">
+  <div class="reply-header">
+    <div class="reply-title">導師回覆：</div>
+    <input type="text" id="tutor-reply" class="input-field" placeholder="導師編號:">
+  </div>
+  <textarea id="tutor-reply-content" class="input-field" placeholder="回覆的信息:"></textarea>
+  <div class="button-group">
+    <button class="button" onclick="copyContent1('tutor-reply', 'tutor-reply-content')">
+      <img src="copy-icon.png" alt="COPY" style="width: 30px; height: 30px; margin-right: 10px;" >
+    </button>
+    <button class="button" onclick="clearContent('tutor-reply', 'tutor-reply-content')">
+      <img src="delete-icon.png" alt="DEL" style="width: 30px; height: 30px;">
+    </button>
+  </div>
+</div>
+
+<!-- 個案回覆區塊 (相同結構) -->
+<div class="conversation" style="margin-left: 350px; margin-top: 30px;">
+  <div class="reply-header">
+    <div class="reply-title">個案回覆：</div>
+    <input type="text" id="parent-reply" class="input-field" placeholder="個案編號:">
+  </div>
+  <textarea id="parent-reply-content" class="input-field" placeholder="回覆的信息:"></textarea>
+  <div class="button-group">
+    <button class="button" onclick="copyContent2('parent-reply', 'parent-reply-content')">
+      <img src="copy-icon.png" alt="COPY" style="width: 30px; height: 30px; margin-right: 10px;" >
+    </button>
+    <button class="button" onclick="clearContent('parent-reply', 'parent-reply-content')">
+      <img src="delete-icon.png" alt="DEL" style="width: 30px; height: 30px;">
+    </button>
+  
+  <script src="script.js"></script>
+  
+</body>
+</html>
